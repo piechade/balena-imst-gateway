@@ -1,0 +1,6 @@
+[submodule "basicstation"]
+	path = basicstation
+	url = git@github.com:lorabasics/basicstation.git
+[submodule "wifi-connect"]
+	path = wifi-connect
+	url = git@github.com:balena-io/wifi-connect.git
