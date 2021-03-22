@@ -1,0 +1,29 @@
+name: "IMST Gateway"
+description: "Deploys a TTN or The Things Stack LoRaWAN gateway with Basics Station Packet Forward protocol on SX1301 or SX1302 LoRa concentrators."
+type: "sw.application"
+assets:
+  # repository:
+  #   type: "blob.asset"
+  #   data:
+  #     url: "https://github.com/balenalabs/basicstation"
+  logo:
+    type: "blob.asset"
+    data:
+      url: "https://raw.githubusercontent.com/balenalabs/basicstation/master/logo.png"
+data:
+  applicationEnvironmentVariables:
+    - GW_GPS: false
+    - GW_RESET_PIN: 5
+    - GW_RESET_GPIO: 5
+    - MODEL: SX1301
+    - TTN_STACK_VERSION: 3
+    - TTN_REGION: eu1
+    - GW_ID: 0
+    - GW_KEY: 0
+    - TC_KEY: 0
+  defaultDeviceType: "raspberrypi"
+  supportedDeviceTypes:
+    - "raspberrypi"
+    - "raspberrypi3"
+    - "raspberrypi3-64"
+    - "raspberrypi4-64"
