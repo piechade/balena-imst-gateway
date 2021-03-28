@@ -4,3 +4,6 @@
 [submodule "wifi-connect"]
 	path = wifi-connect
 	url = git@github.com:balena-io/wifi-connect.git
+[submodule "serial-bridge"]
+	path = serial-bridge
+	url = git@github.com:piechade/serial-bridge.git

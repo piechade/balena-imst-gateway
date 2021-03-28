@@ -21,6 +21,13 @@ data:
     - GW_ID: 0
     - GW_KEY: 0
     - TC_KEY: 0
+    - SERIAL_NAME: FT232R USB UART
+    - SERIAL_BAUD: 9600
+    - SERIAL_BROKER: "dpiecha.de"
+    - SERIAL_PORT: 1883
+    - SERIAL_ID: "bf8e74290b2c4bd6a310ac08731b4ff4"
+    - SERIAL_USERNAME: "imst"
+    - SERIAL_PASSWORT: "imst"
   defaultDeviceType: "raspberrypi"
   supportedDeviceTypes:
     - "raspberrypi"
