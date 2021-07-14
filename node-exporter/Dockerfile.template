@@ -1,0 +1,17 @@
+# FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-golang:latest-build
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine
+
+WORKDIR /usr/src/app
+
+RUN curl -SL https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-armv6.tar.gz > node_exporter.tar.gz
+RUN tar -xvf node_exporter.tar.gz -C /usr/src/app --strip-components=1
+RUN rm node_exporter.tar.gz
+RUN mv node_exporter node-exporter
+
+ENV PATH="/usr/src/app:${PATH}"
+
+# Expose the port Prometheus uses
+EXPOSE 9100
+
+# Start Node Exporter
+ENTRYPOINT [ "node-exporter" ]
