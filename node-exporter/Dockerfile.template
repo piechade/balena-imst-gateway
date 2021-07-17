@@ -1,17 +1,37 @@
 # FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-golang:latest-build
 FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine
 
+RUN install_packages supervisor tzdata python3 py3-pip
+RUN pip3 install supervisor-stdout
+
 WORKDIR /usr/src/app
+
+# RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+# RUN chown -R appuser:appgroup /usr/src/app
+
+# ENV max_mem_in_kb="400000"
+# HEALTHCHECK --interval=5s --timeout=5s --retries=3 \
+#     CMD if [ $(free -m | grep Mem: | awk '{print $3}') -le ${max_mem_in_kb} ]; then exit 0; else exit 1; fi
+
+ENV PATH="/usr/src/app:${PATH}"
 
 RUN curl -SL https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-armv6.tar.gz > node_exporter.tar.gz
 RUN tar -xvf node_exporter.tar.gz -C /usr/src/app --strip-components=1
 RUN rm node_exporter.tar.gz
 RUN mv node_exporter node-exporter
 
-ENV PATH="/usr/src/app:${PATH}"
+COPY supervisord.conf /usr/src/app/supervisord.conf
+
+COPY scripts /usr/src/
+RUN chmod +x /usr/src/*.sh
+
+# USER appuser
 
 # Expose the port Prometheus uses
 EXPOSE 9100
 
-# Start Node Exporter
-ENTRYPOINT [ "node-exporter" ]
+# CMD [ "tail", "-f" ,"/dev/null" ]
+
+CMD ["/usr/bin/supervisord", "--configuration", "/usr/src/app/supervisord.conf"]
+
+# /usr/bin/supervisord --configuration /usr/src/app/supervisord.conf

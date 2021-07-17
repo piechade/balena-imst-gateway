@@ -10,11 +10,11 @@ services:
     volumes:
       - 'resin-data:/data'
     labels:
-      io.resin.features.kernel-modules: '1'
-      io.resin.features.firmware: '1'
-      io.resin.features.dbus: '1'
-      io.resin.features.supervisor-api: '1'
-      io.resin.features.resin-api: '1'
+      io.balena.features.kernel-modules: '1'
+      io.balena.features.firmware: '1'
+      io.balena.features.dbus: '1'
+      io.balena.features.supervisor-api: '1'
+      io.balena.features.resin-api: '1'
   wifi-connect:
     build: ./wifi-connect
     network_mode: host
@@ -29,28 +29,20 @@ services:
     build: ./serial-bridge
     privileged: true
     tty: true
-    restart: always
+    # restart: always
     network_mode: host
-    labels:
-      io.resin.features.kernel-modules: '1'
-      io.resin.features.firmware: '1'
-      io.resin.features.dbus: '1'
-      io.resin.features.supervisor-api: '1'
+    labels: 
+      io.balena.features.supervisor-api: '1'
   node-exporter:
     build: ./node-exporter
     privileged: true
-    tty: true
     network_mode: host
-    restart: always
-    command: --collector.wifi
+    # restart: always
     labels:
       io.balena.features.sysfs: '1'
       io.balena.features.procfs: '1'
       io.balena.features.dbus: '1'
-  scheduler:
-    build: ./scheduler
-    restart: always
-    network_mode: host
+      io.balena.features.supervisor-api: '1'
 
 networks: {}
 
