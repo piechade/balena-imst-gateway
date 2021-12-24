@@ -31,4 +31,4 @@ elif [[ -z "$PUSHGATEWAY_NODE_NAME" ]]; then
     exit
 fi
 
-curl -s localhost:9100/metrics | curl -L -u $PUSHGATEWAY_USERNAME:$PUSHGATEWAY_PASSWORD --data-binary @- $PUSHGATEWAY_SERVER/metrics/job/imst/instance/$PUSHGATEWAY_NODE_NAME
+curl -s localhost:9100/metrics | curl -s -L -u $PUSHGATEWAY_USERNAME:$PUSHGATEWAY_PASSWORD --data-binary @- $PUSHGATEWAY_SERVER/metrics/job/imst/instance/$PUSHGATEWAY_NODE_NAME
